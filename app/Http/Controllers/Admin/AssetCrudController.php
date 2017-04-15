@@ -92,7 +92,7 @@ class AssetCrudController extends CrudController
 
         $this->crud->addColumn([
             'name' => 'user_id', // The db column name
-            'label' => "Assign To", // Table column heading
+            'label' => "Currently Assign To", // Table column heading
             'type' => 'select',
             'entity' => 'user', // the method that defines the relationship in your Model
             'attribute' => "name", // foreign key attribute that is shown to user
@@ -105,17 +105,17 @@ class AssetCrudController extends CrudController
             'type' => 'text'
         ]);
 
-        $this->crud->addColumn([
-            'name' => 'imei_no', // The db column name
-            'label' => "IMEI Number", // Table column heading
-            'type' => 'text'
-        ]);
-
-        $this->crud->addColumn([
-            'name' => 'serial_no', // The db column name
-            'label' => "Serial Number", // Table column heading
-            'type' => 'text'
-        ]);
+//        $this->crud->addColumn([
+//            'name' => 'imei_no', // The db column name
+//            'label' => "IMEI Number", // Table column heading
+//            'type' => 'text'
+//        ]);
+//
+//        $this->crud->addColumn([
+//            'name' => 'serial_no', // The db column name
+//            'label' => "Serial Number", // Table column heading
+//            'type' => 'text'
+//        ]);
 
         $this->crud->addColumn([
             'name' => 'category_id', // The db column name
@@ -135,6 +135,12 @@ class AssetCrudController extends CrudController
             'model' => "App\Models\Brand", // foreign key model
         ]);
 
+        $this->crud->addColumn([
+            'name' => 'audit_trail', // The db column name
+            'label' => "Audit Trail", // Table column heading
+            'type' => 'url'
+        ]);
+
         // ------ CRUD BUTTONS
         // possible positions: 'beginning' and 'end'; defaults to 'beginning' for the 'line' stack, 'end' for the others;
         // $this->crud->addButton($stack, $name, $type, $content, $position); // add a button; possible types are: view, model_function
@@ -142,6 +148,8 @@ class AssetCrudController extends CrudController
         // $this->crud->addButtonFromView($stack, $name, $view, $position); // add a button whose HTML is in a view placed at resources\views\vendor\backpack\crud\buttons
         // $this->crud->removeButton($name);
         // $this->crud->removeButtonFromStack($name, $stack);
+
+//        $this->crud->addButton('line ', 'test', 'view', 'test', 'beginning');
 
         // ------ CRUD ACCESS
         // $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete']);

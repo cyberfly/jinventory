@@ -23,7 +23,15 @@
 
           <!-- Manage brands -->
           {{--<li><a href="{{ url('/admin/assign') }}"><i class="fa fa-files-o"></i> <span>Assign & Return Assets</span></a></li>--}}
-          <li><a href="{{ url('/admin/action') }}"><i class="fa fa-files-o"></i> <span>Assign & Return Assets</span></a></li>
+          <li class="treeview">
+            <a href="#"><i class="fa fa-group"></i> <span>Assign & Return Assets</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a href="{{ url('/admin/action/create') }}"><i class="fa fa-files-o"></i> <span>Assign Assets</span></a></li>
+                <li><a href="{{ url('/admin/action') }}"><i class="fa fa-files-o"></i> <span>Assign & Return Assets History</span></a></li>
+
+            </ul>
+          </li>
+
           <li><a href="{{ url('/admin/asset') }}"><i class="fa fa-files-o"></i> <span>Assets</span></a></li>
           <li><a href="{{ url('/admin/category') }}"><i class="fa fa-files-o"></i> <span>Categories</span></a></li>
           <li><a href="{{ url('/admin/brand') }}"><i class="fa fa-files-o"></i> <span>Brands</span></a></li>

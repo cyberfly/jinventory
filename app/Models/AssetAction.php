@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
-class Action extends Model
+class AssetAction extends Model
 {
     use CrudTrait;
 
@@ -18,7 +18,7 @@ class Action extends Model
     //protected $table = 'actions';
     //protected $primaryKey = 'id';
     // public $timestamps = false;
-     protected $guarded = ['id','assign_assets','extras','item_id'];
+     protected $guarded = ['id','assign_assets','item_id'];
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
@@ -35,14 +35,9 @@ class Action extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function user()
+    public function action()
     {
-        return $this->belongsTo('App\User');
-    }
-
-    public function asset_actions()
-    {
-        return $this->hasMany('App\Models\AssetAction');
+        return $this->belongsTo('App\Models\Action');
     }
 
     /*

@@ -52,13 +52,13 @@
                     @foreach( $field['columns'] as $prop => $label)
                     <td>
                         <input class="form-control input-sm {{ $prop }}" type="text" >
-                        <input type="hidden" name="item_id[]" class="item_id" value="" />
                     </td>
                     @endforeach
                     <td>
                         <span class="btn btn-sm btn-default sort-handle"><span class="sr-only">sort item</span><i class="fa fa-sort" role="presentation" aria-hidden="true"></i></span>
                     </td>
                     <td>
+                        <input type="hidden" name="item_id[]" class="item_id" value="" />
                         <button ng-hide="min > -1 && $index < min" class="btn btn-sm btn-default" type="button" ng-click="removeItem(item);"><span class="sr-only">delete item</span><i class="fa fa-trash" role="presentation" aria-hidden="true"></i></button>
                     </td>
                 </tr>

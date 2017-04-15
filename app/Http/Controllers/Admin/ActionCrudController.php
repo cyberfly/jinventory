@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Action;
+use App\Models\Asset;
+use App\Models\AssetAction;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
@@ -39,7 +42,7 @@ class ActionCrudController extends CrudController
 
         $this->crud->addField([
             'name' => 'user_id',
-            'label' => 'User',
+            'label' => 'Assign To',
             'type'  => 'select2',
             'entity' => 'user',
             'attribute' => 'name',
@@ -84,7 +87,7 @@ class ActionCrudController extends CrudController
 
         $this->crud->addColumn([
             'name' => 'user_id', // The db column name
-            'label' => "Perform By", // Table column heading
+            'label' => "Assign To", // Table column heading
             'type' => 'select',
             'entity' => 'user', // the method that defines the relationship in your Model
             'attribute' => "name", // foreign key attribute that is shown to user
@@ -93,7 +96,7 @@ class ActionCrudController extends CrudController
 
         $this->crud->addColumn([
             'name' => 'action_type', // The db column name
-            'label' => "Action", // Table column heading
+            'label' => "Action Type", // Table column heading
             'type' => 'text'
         ]);
 
@@ -101,6 +104,12 @@ class ActionCrudController extends CrudController
             'name' => 'remark', // The db column name
             'label' => "Remark", // Table column heading
             'type' => 'text'
+        ]);
+
+        $this->crud->addColumn([
+            'type' => 'date',
+            'name' => 'created_at',
+            'label' => 'Created on'
         ]);
 
         // ------ CRUD BUTTONS
@@ -161,6 +170,24 @@ class ActionCrudController extends CrudController
         // your additional operations before save here
         $redirect_location = parent::storeCrud();
         // your additional operations after save here
+
+        foreach ($request->item_id as $item_id) {
+
+            if (!empty($item_id)) {
+                $asset_action = new AssetAction();
+                $asset_action->action_id = $this->crud->entry->id;
+                $asset_action->asset_id = $item_id;
+                $asset_action->save();
+
+//                update asset last user
+                $asset = Asset::findOrFail($item_id);
+                $asset->user_id = $request->user_id;
+                $asset->save();
+            }
+
+        }
+
+//        dd($this->crud->entry);
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
     }
